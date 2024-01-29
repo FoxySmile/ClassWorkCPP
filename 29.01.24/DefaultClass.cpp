@@ -57,6 +57,11 @@ public:
 	}
 
 	void deletedMarks(int index) {
+		if (countMarks == 1) {
+			delete[]marks;
+			marks = nullptr;
+			return;
+		}
 		int* buf = new int [countMarks - 1];
 		for (int i = 0; i < index; i++) {
 			buf[i] = marks[i];
@@ -148,6 +153,14 @@ public:
 	}
 
 	void deletedStudent(int index) {
+		if (countStudents == 0) {
+			return;
+		}
+		if (this->countStudents == 1) {
+			delete[] students[0];
+			students = nullptr;
+			return;
+		}
 		Student** buf = new Student * [countStudents - 1];
 		for (int i = 0; i < index; i++) {
 			buf[i] = students[i];
@@ -155,6 +168,7 @@ public:
 		for (int i = index + 1; i, countStudents; i++) {
 			buf[i - 1] = students[i];
 		}
+		delete[]students[index];
 		delete[]students;
 		students = buf;
 		countStudents--;
