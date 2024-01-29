@@ -28,7 +28,9 @@ public:
 	}
 
 	~Student() {
-		if (marks != nullptr) delete[] marks;
+		if (this->marks != nullptr) {
+			delete[] marks;
+		}
 	}
 
 	void operator = (Student& st) {
@@ -50,29 +52,32 @@ public:
 		marks = buf;
 	}
 
-	void changeMark(int index, int mark) {
-		if (index >= 0 && index < countMarks) {
-			marks[index] = mark;
-		}
-	}
-
-	void deletedMarks(int index) {
+	void delMark(int index, int mark) {
+		if (countMarks == 0) return;
 		if (countMarks == 1) {
+			countMarks = 0;
 			delete[]marks;
 			marks = nullptr;
 			return;
 		}
-		int* buf = new int [countMarks - 1];
+		int* buf = new int[countMarks - 1];
 		for (int i = 0; i < index; i++) {
 			buf[i] = marks[i];
 		}
-		for (int i = index + 1; i, countMarks; i++) {
+		for (int i = index + 1; i < countMarks; i++) {
 			buf[i - 1] = marks[i];
 		}
 		delete[]marks;
 		marks = buf;
 		countMarks--;
 	}
+
+	void changeMark(int index, int mark) {
+		if (index >= 0 && index < countMarks) {
+			marks[index] = mark;
+		}
+	}
+
 
 
 	void showInfo() {
@@ -141,9 +146,6 @@ public:
 		for (int i = 0; i < countStudents; i++) {
 			buf[i] = students[i];
 		}
-		for (int i = 0; i < countStudents; i++) {
-			students[i] = nullptr;
-		}
 		delete[]students;
 
 		buf[countStudents] = new Student(st);
@@ -152,7 +154,7 @@ public:
 		students = buf;
 	}
 
-	void deletedStudent(int index) {
+	void delStudent(int index) {
 		if (countStudents == 0) {
 			return;
 		}
@@ -165,13 +167,15 @@ public:
 		for (int i = 0; i < index; i++) {
 			buf[i] = students[i];
 		}
-		for (int i = index + 1; i, countStudents; i++) {
+		for (int i = index + 1; i < countStudents; i++) {
 			buf[i - 1] = students[i];
 		}
-		delete[]students[index];
+
+		delete students[index];
 		delete[]students;
-		students = buf;
+
 		countStudents--;
+		students = buf;
 	}
 
 	Student* getStudentByIndex(int index) {
@@ -184,8 +188,7 @@ public:
 
 
 
-int main()
-{
+int main(){
 	setlocale(LC_ALL, "");
 	srand(time(NULL));
 
@@ -211,9 +214,8 @@ int main()
 		groups[i]->showInfo();
 	}
 
-	/*cout << "test uno student: " << endl;
-	groups[0].showInfo();
-	groups[0].getStudentByIndex(0)->changeMark(0, 12);
-	groups[0].showInfo();*/
-
+	groups[0]->delStudent(0);
+	for (int i = 0; i < countGroups; i++) {
+		groups[i]->showInfo();
+	}
 }
