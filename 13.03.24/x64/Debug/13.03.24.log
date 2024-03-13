@@ -1,0 +1,14 @@
+﻿  Calculator.cpp
+C:\Users\stmra\OneDrive\Рабочий стол\13.03.24\13.03.24\Calculator.cpp(10,81): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\stmra\OneDrive\Рабочий стол\13.03.24\13.03.24\Calculator.cpp(10,72): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+  Source.cpp
+  Создание кода...
+  13.03.24.vcxproj -> C:\Users\stmra\OneDrive\Рабочий стол\13.03.24\x64\Debug\13.03.24.exe
